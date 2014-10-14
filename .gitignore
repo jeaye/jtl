@@ -1,2 +1,5 @@
 # Output binaries
 /bin/
+
+# YCM
+/.ycm_extra_conf.pyc
