@@ -1,3 +1,12 @@
+/*
+  Copyright © 2014 Jesse 'Jeaye' Wilkerson
+  See licensing at:
+    http://opensource.org/licenses/MIT
+
+  File: src/main.cpp
+  Author: Jesse 'Jeaye' Wilkerson
+*/
+
 #include <iostream>
 #include <iterator>
 #include <functional>

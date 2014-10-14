@@ -1,5 +1,8 @@
 # Output binaries
 /bin/
 
+# Generated files
+/Makefile
+
 # YCM
 /.ycm_extra_conf.pyc

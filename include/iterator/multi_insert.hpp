@@ -1,3 +1,12 @@
+/*
+  Copyright © 2014 Jesse 'Jeaye' Wilkerson
+  See licensing at:
+    http://opensource.org/licenses/MIT
+
+  File: include/iterator/multi_insert.hpp
+  Author: Jesse 'Jeaye' Wilkerson
+*/
+
 #pragma once
 
 #include <iterator>
@@ -25,9 +34,9 @@ namespace jtl
         return *this;
       }
 
+      /* NOP */
       multi_insert_iterator& operator *() noexcept
       { return *this; }
-
       multi_insert_iterator& operator ++() noexcept
       { return *this; }
       multi_insert_iterator& operator ++(int) noexcept
@@ -37,6 +46,7 @@ namespace jtl
       C &container_;
       typename C::iterator it_{};
   };
+
   template <typename C>
   multi_insert_iterator<C> multi_inserter(C &c, typename C::iterator const it)
   { return { c, it }; }
