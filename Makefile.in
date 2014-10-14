@@ -1,7 +1,7 @@
 # Sources
 OUT_DIR = bin/
 SOURCES =  \
-				 test/src/main.cpp
+				 	test/src/main.cpp
 OBJECTS = ${SOURCES:.cpp=.cpp.o}
 TEST_OBJECTS = $(SOURCES:.cpp=.test)
 TESTS = $(foreach test,${SOURCES}, $(addprefix ${OUT_DIR}, $(notdir ${test})))
@@ -15,7 +15,7 @@ CXX ?= c++
 CXX_WARN_FLAGS = -Wall -Wextra -Werror -pedantic
 CXX_DEBUG_FLAGS = 
 CXX_OPTIM_FLAGS = -O3
-CXX_INCLUDE_FLAGS = -Iinclude -Itest/include -Ilib/jest/include
+CXX_INCLUDE_FLAGS = -Itest/include -Iinclude -Ilib/jest/include
 CXX_PLATFORM_FLAGS = %CXX_PLATFORM_FLAGS%
 CXX_FLAGS = -std=c++1y \
 						${CXX_PLATFORM_FLAGS} \
@@ -28,10 +28,6 @@ LD_PLATFORM_LIBS = %LD_PLATFORM_LIBS%
 LD_LIBS = ${LD_PLATFORM_LIBS}
 
 PROJECT = %PROJECT%
-
-.PHONY: all threaded setup clean ${PROJECT} ${PROJECT}_setup install uninstall test test_setup 
-
-.SILENT:
 
 all: ${PROJECT}
 	${MAKE} -j ${THREADS} threaded
@@ -71,3 +67,7 @@ test_setup:
 
 %.test: test_setup
 	${OUT_DIR}/$(notdir $(shell echo $@ | sed 's/\.test//')) > /dev/null
+
+.SILENT:
+
+.PHONY: all threaded setup clean ${PROJECT} ${PROJECT}_setup install uninstall test test_setup 
