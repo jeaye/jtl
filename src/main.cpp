@@ -14,6 +14,7 @@
 #include <vector>
 
 #include "iterator/multi_insert.hpp"
+#include "iterator/multi_back_insert.hpp"
 
 int main()
 {
