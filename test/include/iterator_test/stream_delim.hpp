@@ -69,4 +69,21 @@ namespace jest
       { expect_equal(str[i], chars[i - diff]); }
     }
   }
+
+  template <> template <>
+  void jtl::stream_delim_group::test<3>()
+  {
+    std::stringstream ss{ "meow0\nmeow1\nmeow2\nmeow3\n" };
+    std::vector<std::string> lines;
+    std::transform(jtl::iterator::stream_delim<>{ ss },
+                   jtl::iterator::stream_delim<>{},
+                   jtl::iterator::multi_back_inserter(lines),
+                   [](std::string const &s) -> std::vector<std::string>
+                   { return {"<" + s + ">"}; });
+    expect_equal(lines.size(), 4ul);
+    for(auto const &e : lines)
+    { expect_equal(e.size(), 7ul); }
+    for(std::size_t i{}; i < lines.size(); ++i)
+    { expect_equal(lines[i], "<meow" + std::to_string(i) + ">"); }
+  }
 }
