@@ -19,7 +19,7 @@ namespace jtl
 {
   struct multi_insert_test{};
   using multi_insert_group = jest::group<multi_insert_test>;
-  static multi_insert_group const multi_insert_obj{ "multi_insert_iterator" };
+  static multi_insert_group const multi_insert_obj{ "multi_insert" };
 }
 
 namespace jest
@@ -29,7 +29,8 @@ namespace jest
   {
     std::string const s{ "testing123" };
     std::string out;
-    std::transform(s.begin(), s.end(), jtl::multi_inserter(out, out.begin()),
+    std::transform(s.begin(), s.end(),
+                   jtl::iterator::multi_inserter(out, out.begin()),
     [](char const c)
     { return "[" + std::string{ c } + "]"; });
     expect_equal(out, "[t][e][s][t][i][n][g][1][2][3]");
@@ -40,7 +41,8 @@ namespace jest
   {
     std::string const s{ "testing123" };
     std::string out;
-    std::transform(s.begin(), s.end(), jtl::multi_inserter(out, out.begin()),
+    std::transform(s.begin(), s.end(),
+                   jtl::iterator::multi_inserter(out, out.begin()),
     [](char const c) -> std::vector<char>
     { return {'[', c, ']'}; });
     expect_equal(out, "[t][e][s][t][i][n][g][1][2][3]");
@@ -51,7 +53,8 @@ namespace jest
   {
     std::vector<std::vector<char>> const v{ { '1', '2' }, { '3', '4' } };
     std::string out;
-    std::copy(v.begin(), v.end(), jtl::multi_inserter(out, out.begin()));
+    std::copy(v.begin(), v.end(),
+              jtl::iterator::multi_inserter(out, out.begin()));
     expect_equal(out, "1234");
   }
 
@@ -61,7 +64,7 @@ namespace jest
     std::vector<std::vector<char>> const v{ { '1', '2' }, { '3', '4' } };
     std::string out{ "{}" };
     std::copy(v.begin(), v.end(),
-              jtl::multi_inserter(out, std::next(out.begin())));
+              jtl::iterator::multi_inserter(out, std::next(out.begin())));
     expect_equal(out, "{1234}");
   }
 }
