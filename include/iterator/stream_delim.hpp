@@ -50,7 +50,10 @@ namespace jtl
         {
           if(!alive_)
           { throw std::out_of_range{ "invalid stream_delim iterator" }; }
-          return ++stream_delim{ *this };
+
+          auto const copy(*this);
+          ++*this;
+          return copy;
         }
 
         friend bool operator ==(stream_delim const &lhs, stream_delim const &rhs)

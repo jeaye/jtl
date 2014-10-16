@@ -25,7 +25,7 @@ namespace jtl
 namespace jest
 {
   template <> template <>
-  void jtl::multi_insert_group::test<0>()
+  void jtl::multi_insert_group::test<0>() /* transform string */
   {
     std::string const s{ "testing123" };
     std::string out;
@@ -37,7 +37,7 @@ namespace jest
   }
 
   template <> template <>
-  void jtl::multi_insert_group::test<1>()
+  void jtl::multi_insert_group::test<1>() /* transform vector */
   {
     std::string const s{ "testing123" };
     std::string out;
@@ -59,7 +59,7 @@ namespace jest
   }
 
   template <> template <>
-  void jtl::multi_insert_group::test<3>()
+  void jtl::multi_insert_group::test<3>() /* copy */
   {
     std::vector<std::vector<char>> const v{ { '1', '2' }, { '3', '4' } };
     std::string out{ "{}" };
