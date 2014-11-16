@@ -32,7 +32,8 @@ namespace jtl
         multi_insert& operator =(T &&c)
         {
           for(auto &&e : c)
-          { it_ = std::next(container_.insert(it_, std::forward<decltype(e)>(e))); }
+          { it_ = std::next(container_.insert(it_,
+                            std::forward<decltype(e)>(e))); }
           return *this;
         }
 

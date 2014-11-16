@@ -30,7 +30,8 @@ namespace jtl
         template <typename T>
         multi_back_insert& operator =(T &&c)
         {
-          std::copy(std::begin(c), std::end(c), std::back_inserter(container_));
+          std::copy(std::begin(c), std::end(c),
+                    std::back_inserter(container_));
           return *this;
         }
 
