@@ -1,10 +1,9 @@
 # Sources
 OUT_DIR = bin/
 SOURCES =  \
-				 	test/src/main.cpp
+				 	test/src/iterator/main.cpp
 OBJECTS = ${SOURCES:.cpp=.cpp.o}
 TEST_OBJECTS = $(SOURCES:.cpp=.test)
-TESTS = $(foreach test,${SOURCES}, $(addprefix ${OUT_DIR}, $(notdir ${test})))
 
 # Generation/Installation
 PREFIX = %PREFIX%
@@ -49,7 +48,8 @@ ${PROJECT}_setup: setup
 
 %.cpp.o: %.cpp ${PROJECT}_setup
 	echo "  Compiling $<"
-	${CXX} ${CXX_FLAGS} $< ${LD_LIBS} -o $(addprefix ${OUT_DIR}, $(notdir $(shell echo "$<" | sed 's/\.cpp//')))
+	mkdir -p ${OUT_DIR}$(dir $(shell echo $< | sed 's_test/src/__')) > /dev/null
+	${CXX} ${CXX_FLAGS} $< ${LD_LIBS} -o ${OUT_DIR}$(shell echo "$(shell echo $< | sed 's/\.cpp//')" | sed 's_test/src/__') > /dev/null
 
 install:
 	export installdir=${DESTDIR}${INCLUDEDIR} && \
@@ -66,7 +66,7 @@ test: test_setup ${TEST_OBJECTS}
 test_setup:
 
 %.test: test_setup
-	${OUT_DIR}/$(notdir $(shell echo $@ | sed 's/\.test//')) > /dev/null
+	${OUT_DIR}$(shell echo "$(shell echo $@ | sed 's/\.test//')" | sed 's_test/src/__') > /dev/null
 
 .SILENT:
 
