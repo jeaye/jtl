@@ -9,9 +9,9 @@
 
 #include <jest/jest.hpp>
 
-#include "iterator_test/multi_insert.hpp"
-#include "iterator_test/multi_back_insert.hpp"
-#include "iterator_test/stream_delim.hpp"
+#include "iterator/multi_insert.hpp"
+#include "iterator/multi_back_insert.hpp"
+#include "iterator/stream_delim.hpp"
 
 int main()
 {

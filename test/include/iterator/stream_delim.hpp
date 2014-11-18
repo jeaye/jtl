@@ -11,8 +11,8 @@
 
 #include <jest/jest.hpp>
 
-#include "iterator/stream_delim.hpp"
-#include "iterator/multi_back_insert.hpp"
+#include <jtl/iterator/stream_delim.hpp>
+#include <jtl/iterator/multi_back_insert.hpp>
 
 #include <algorithm>
 
