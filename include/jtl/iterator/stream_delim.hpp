@@ -3,7 +3,6 @@
   See licensing at:
     http://opensource.org/licenses/MIT
 
-  File: include/iterator/stream_delim.hpp
   Author: Jesse 'Jeaye' Wilkerson
 */
 

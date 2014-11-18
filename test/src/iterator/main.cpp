@@ -3,7 +3,6 @@
   See licensing at:
     http://opensource.org/licenses/MIT
 
-  File: test/src/main.cpp
   Author: Jesse 'Jeaye' Wilkerson
 */
 

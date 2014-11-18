@@ -3,7 +3,6 @@
   See licensing at:
     http://opensource.org/licenses/MIT
 
-  File: include/iterator/multi_insert.hpp
   Author: Jesse 'Jeaye' Wilkerson
 */
 
