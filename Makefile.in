@@ -1,7 +1,8 @@
 # Sources
 OUT_DIR = bin/
 SOURCES =  \
-				 	test/src/iterator/main.cpp
+				 	test/src/iterator/main.cpp \
+				 	test/src/sfinae/main.cpp
 OBJECTS = ${SOURCES:.cpp=.cpp.o}
 TEST_OBJECTS = $(SOURCES:.cpp=.test)
 
@@ -66,7 +67,9 @@ test: test_setup ${TEST_OBJECTS}
 test_setup:
 
 %.test: test_setup
+	echo "******** ${OUT_DIR}$(shell echo "$(shell echo $@ | sed 's/\.test//')" | sed 's_test/src/__') ********"
 	${OUT_DIR}$(shell echo "$(shell echo $@ | sed 's/\.test//')" | sed 's_test/src/__') > /dev/null
+	echo
 
 .SILENT:
 
