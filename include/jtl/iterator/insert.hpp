@@ -14,44 +14,43 @@ namespace jtl
 {
   namespace iterator
   {
-    template <typename C>
-    class multi_insert
+    template <typename C, typename It>
+    class insert
       : public std::iterator<std::output_iterator_tag,
                              typename C::value_type>
     {
       public:
         using value_type = typename C::value_type;
 
-        multi_insert() = delete;
-        multi_insert(C &c, typename C::iterator const i)
+        insert() = delete;
+        insert(C &c, It const it)
           : container_{ c }
-          , it_{ i }
+          , it_{ it }
         { }
 
         template <typename T>
-        multi_insert& operator =(T &&c)
+        insert& operator =(T &&c)
         {
-          for(auto &&e : c)
-          { it_ = std::next(container_.insert(it_,
-                            std::forward<decltype(e)>(e))); }
+          it_ = container_.insert(it_, std::forward<T>(c));
+          ++it_;
           return *this;
         }
 
         /* NOP */
-        multi_insert& operator *() noexcept
+        insert& operator *() noexcept
         { return *this; }
-        multi_insert& operator ++() noexcept
+        insert& operator ++() noexcept
         { return *this; }
-        multi_insert& operator ++(int) noexcept
+        insert& operator ++(int) noexcept
         { return *this; }
 
       private:
         C &container_;
-        typename C::iterator it_{};
+        It it_{};
     };
 
-    template <typename C>
-    multi_insert<C> multi_inserter(C &c, typename C::iterator const it)
+    template <typename C, typename It>
+    insert<C, It> inserter(C &c, It const it)
     { return { c, it }; }
   }
 }

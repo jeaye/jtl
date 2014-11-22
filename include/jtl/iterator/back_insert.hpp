@@ -22,6 +22,7 @@ namespace jtl
       public:
         using value_type = typename C::value_type;
 
+        back_insert() = delete;
         back_insert(C &c)
           : container_{ c }
         { }
@@ -29,7 +30,7 @@ namespace jtl
         template <typename T>
         back_insert& operator =(T &&c)
         {
-          container_.push_back(c);
+          container_.push_back(std::forward<T>(c));
           return *this;
         }
 

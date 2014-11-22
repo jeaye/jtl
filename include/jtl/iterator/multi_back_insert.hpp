@@ -22,6 +22,7 @@ namespace jtl
       public:
         using value_type = typename C::value_type;
 
+        multi_back_insert() = delete;
         multi_back_insert(C &c)
           : container_{ c }
         { }
