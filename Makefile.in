@@ -2,7 +2,8 @@
 OUT_DIR = bin/
 SOURCES =  \
 				 	test/src/iterator/main.cpp \
-				 	test/src/sfinae/main.cpp
+				 	test/src/trait/main.cpp \
+				 	test/src/algorithm/main.cpp
 OBJECTS = ${SOURCES:.cpp=.cpp.o}
 TEST_OBJECTS = $(SOURCES:.cpp=.test)
 
@@ -14,7 +15,7 @@ INCLUDEDIR = %INCLUDEDIR%
 CXX ?= c++
 CXX_WARN_FLAGS = -Wall -Wextra -Werror -pedantic
 CXX_DEBUG_FLAGS = 
-CXX_OPTIM_FLAGS = -O3
+CXX_OPTIM_FLAGS = -ggdb
 CXX_INCLUDE_FLAGS = -Itest/include -Iinclude -Ilib/jest/include
 CXX_PLATFORM_FLAGS = %CXX_PLATFORM_FLAGS%
 CXX_FLAGS = -std=c++1y \

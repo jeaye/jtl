@@ -10,7 +10,7 @@
 
 namespace jtl
 {
-  namespace sfinae
+  namespace trait
   {
     template <typename... Ts>
     bool constexpr disable()

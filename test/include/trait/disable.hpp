@@ -10,7 +10,7 @@
 
 #include <jest/jest.hpp>
 
-#include <jtl/sfinae/disable.hpp>
+#include <jtl/trait/disable.hpp>
 
 #include <string>
 #include <vector>
@@ -34,7 +34,7 @@ namespace jest
   {
     expect_exception<std::runtime_error>([]
     {
-      if(!jtl::sfinae::disable<void>())
+      if(!jtl::trait::disable<void>())
       { throw std::runtime_error{ "this is good" }; }
     });
   }
@@ -42,35 +42,35 @@ namespace jest
   template <> template <>
   void jtl::disable_group::test<1>() /* constexpr */
   {
-    jtl::constexpr_test<jtl::sfinae::disable<std::string>()> _;
+    jtl::constexpr_test<jtl::trait::disable<std::string>()> _;
     static_cast<void>(_);
   }
 
   template <> template <>
   void jtl::disable_group::test<2>() /* variadic */
   {
-    jtl::constexpr_test<jtl::sfinae::disable<std::string, bool, int>()> _;
+    jtl::constexpr_test<jtl::trait::disable<std::string, bool, int>()> _;
     static_cast<void>(_);
   }
 
   template <> template <>
   void jtl::disable_group::test<3>() /* type */
   {
-    std::vector<jtl::sfinae::disable_t<int>> _;
+    std::vector<jtl::trait::disable_t<int>> _;
     static_cast<void>(_);
   }
 
   template <> template <>
   void jtl::disable_group::test<4>() /* type constexpr */
   {
-    jtl::constexpr_test<jtl::sfinae::disable_t<std::string>::value> _;
+    jtl::constexpr_test<jtl::trait::disable_t<std::string>::value> _;
     static_cast<void>(_);
   }
 
   template <> template <>
   void jtl::disable_group::test<5>() /* type variadic */
   {
-    std::vector<jtl::sfinae::disable_t<int, void, float, std::string>> _;
+    std::vector<jtl::trait::disable_t<int, void, float, std::string>> _;
     static_cast<void>(_);
   }
 }

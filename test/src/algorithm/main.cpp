@@ -8,7 +8,7 @@
 
 #include <jest/jest.hpp>
 
-#include "trait/disable.hpp"
+#include "algorithm/consume.hpp"
 
 int main()
 {

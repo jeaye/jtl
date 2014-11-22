@@ -61,9 +61,9 @@ namespace jtl
         { return !(lhs == rhs); }
 
       private:
-        istream_type * const stream_{};
+        istream_type *stream_{};
         string_type string_;
-        char_type const delim_{ '\n' };
+        char_type delim_{ '\n' };
         bool alive_{ false };
     };
   }
