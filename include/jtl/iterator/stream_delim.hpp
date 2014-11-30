@@ -11,6 +11,8 @@
 #include <iterator>
 #include <stdexcept>
 
+#include <jtl/namespace.hpp>
+
 namespace jtl
 {
   namespace iterator

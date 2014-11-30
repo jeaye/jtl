@@ -17,7 +17,7 @@ namespace jtl
   namespace iterator
   {
     template <typename C>
-    class back_insert
+    class front_insert
       : public std::iterator<std::output_iterator_tag,
           typename std::iterator_traits
           <
@@ -28,32 +28,35 @@ namespace jtl
         using iterator = decltype(std::begin(std::declval<C&>()));
         using value_type = typename std::iterator_traits<iterator>::value_type;
 
-        back_insert() = delete;
-        back_insert(C &c)
+        front_insert() = delete;
+        front_insert(C &c)
           : container_{ c }
+          , it_{ std::begin(c) }
         { }
 
         template <typename T>
-        back_insert& operator =(T &&c)
+        front_insert& operator =(T &&c)
         {
-          container_.push_back(std::forward<T>(c));
+          it_ = container_.insert(it_, std::forward<T>(c));
+          ++it_;
           return *this;
         }
 
         /* NOP */
-        back_insert& operator *() noexcept
+        front_insert& operator *() noexcept
         { return *this; }
-        back_insert& operator ++() noexcept
+        front_insert& operator ++() noexcept
         { return *this; }
-        back_insert& operator ++(int) noexcept
+        front_insert& operator ++(int) noexcept
         { return *this; }
 
       private:
         C &container_;
+        iterator it_{};
     };
 
     template <typename C>
-    back_insert<C> back_inserter(C &c)
+    front_insert<C> front_inserter(C &c)
     { return { c }; }
   }
 }

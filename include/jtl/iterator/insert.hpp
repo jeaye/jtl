@@ -10,6 +10,8 @@
 
 #include <iterator>
 
+#include <jtl/namespace.hpp>
+
 namespace jtl
 {
   namespace iterator
@@ -17,10 +19,14 @@ namespace jtl
     template <typename C, typename It>
     class insert
       : public std::iterator<std::output_iterator_tag,
-                             typename C::value_type>
+          typename std::iterator_traits
+          <
+            decltype(std::begin(std::declval<C&>()))
+          >::value_type>
     {
       public:
-        using value_type = typename C::value_type;
+        using iterator = decltype(std::begin(std::declval<C&>()));
+        using value_type = typename std::iterator_traits<iterator>::value_type;
 
         insert() = delete;
         insert(C &c, It const it)

@@ -10,6 +10,8 @@
 
 #include <iterator>
 
+#include <jtl/namespace.hpp>
+
 namespace jtl
 {
   namespace iterator

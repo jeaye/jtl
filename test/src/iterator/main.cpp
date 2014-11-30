@@ -9,6 +9,7 @@
 #include <jest/jest.hpp>
 
 #include "iterator/insert.hpp"
+#include "iterator/front_insert.hpp"
 #include "iterator/back_insert.hpp"
 #include "iterator/multi_insert.hpp"
 #include "iterator/multi_back_insert.hpp"
