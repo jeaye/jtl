@@ -16,6 +16,24 @@ namespace jtl
 {
   namespace iterator
   {
+    /* Similar to <jtl::iterator::insert>, but inserts ranges at a time.
+     *
+     * When you want to map a range of ranges to a single output, you
+     * can use a multi_insert or <jtl::multi_back_insert> iterator.
+     *
+     * Example:
+     * ```cpp
+     * // Each transform call returns a std::string, not the normal char
+     * std::string const s{ "data" };
+     * std::string out{ "{}" };
+     * std::transform(s.begin(), s.end(),
+     *                jtl::iterator::multi_inserter(out, std::next(out.begin())),
+     * [](char const c)
+     * { return "[" + std::string{ c } + "]"; });
+     * 
+     * // out == "{[d][a][t][a]}"
+     * ```
+     */
     template <typename C>
     class multi_insert
       : public std::iterator<std::output_iterator_tag,

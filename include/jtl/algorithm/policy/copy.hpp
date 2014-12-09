@@ -23,7 +23,7 @@ namespace jtl
     {
       /* Specifies the data transfer format for an algorithm.
        *
-       * Example: jtl::alg::consume
+       * See (for example): <jtl::algorithm::consume>
        */
       enum class transfer
       {

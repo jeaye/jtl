@@ -46,13 +46,13 @@ namespace jtl
      * `output` will be `{ { 0, 1, 2 }, { 3, 4, 5 } }`.
      * 
      * Transfer will follow the Policy, which defaults to
-     * jtl::alg::pol::transfer::move but may be specified as
-     * jtl::alg::pol::transfer::copy.
+     * <jtl::algorithm::policy::transfer::move> but may be specified as
+     * <jtl::algorithm::policy::transfer::copy>.
      *
      * Note that normal std::insert and std::back_insert iterators are
-     * not compatible with jtl::alg::consume, since their iterator traits are
-     * void. Instead, use jtl::it::insert and jtl::it::back_insert, which
-     * have identical usage.
+     * not compatible with <jtl::algorithm::consume>, since their iterator
+     * traits are void. Instead, use <jtl::iterator::insert> and
+     * <jtl::iterator::back_insert>, which have identical usage.
      */
     template <std::size_t N, policy::transfer Policy = policy::transfer::move,
               typename B_It, typename E_It, typename O_It>
@@ -65,9 +65,9 @@ namespace jtl
       { begin = detail::consume<Policy>(begin, out++, seq); }
     }
 
-    /* Provides shorthand for specifying a copy policy to jtl::alg::consume.
+    /* Shorthand for specifying a copy policy to <jtl::algorithm::consume>.
      *
-     * See jtl::alg::consume.
+     * See <jtl::algorithm::consume>.
      */
     template <std::size_t N, typename B_It, typename E_It, typename O_It>
     void consume_copy(B_It begin, E_It const end, O_It out)

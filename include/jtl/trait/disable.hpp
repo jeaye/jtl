@@ -34,7 +34,7 @@ namespace jtl
     bool constexpr disable()
     { return false; }
 
-    /* Works the same as jtl::trait::disable, using a type instead.
+    /* Works the same as <jtl::trait::disable>, using a type instead.
      *
      * The value held in this type will unconditionally be false
      * for any type. **Specialization is not permitted.**
@@ -43,7 +43,7 @@ namespace jtl
     struct disable_t
     { static bool constexpr const value{ false }; };
 
-    /* Works the same as jtl::trait::disable, but depends on values.
+    /* Works the same as <jtl::trait::disable>, but depends on values.
      *
      * This allows disabling based on paramaterized values.
      * for any type or value. **Specialization is not permitted.**
@@ -59,7 +59,7 @@ namespace jtl
     bool constexpr disable_value()
     { return false; }
 
-    /* Works the same as jtl::trait::disable_value, using a type instead.
+    /* Works the same as <jtl::trait::disable_value>, using a type instead.
      *
      * The value held in this type will unconditionally be false
      * for any type or value. **Specialization is not permitted.**

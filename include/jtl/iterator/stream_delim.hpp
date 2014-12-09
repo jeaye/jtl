@@ -8,6 +8,7 @@
 
 #pragma once
 
+#include <string>
 #include <iterator>
 #include <stdexcept>
 
@@ -17,6 +18,28 @@ namespace jtl
 {
   namespace iterator
   {
+    /* Provides iteration over input streams given a delimiter.
+     *
+     * Similar to std::getline, stream_delim allows one to iterate
+     * through an input stream using a delimiter, which defaults to
+     * '\n'.
+     * 
+     * The stream_delim template is parameterized on the char type;
+     * it should be compatible with any input stream using the same char
+     * type.
+     *
+     * A default-constructed stream_delim iterator represents the
+     * end of the range.
+     * 
+     * Example:
+     * ```cpp
+     * std::stringstream ss{ "0\n1\n2\n3" };
+     * std::vector<std::string> lines;
+     * std::copy(jtl::iterator::stream_delim<>{ ss },
+     *           jtl::iterator::stream_delim<>{},
+     *           std::back_inserter(lines));
+     * ```
+     */
     template <typename C = char>
     class stream_delim
       : public std::iterator<std::input_iterator_tag, C>
@@ -28,10 +51,16 @@ namespace jtl
         using string_type = std::basic_string<C, traits_type>;
 
         stream_delim() = default;
+        
+        /* Constructs a new iterator using the input stream and delimiter.
+         *
+         * The delimiter defaults to '\n' but can be any valid value
+         * of the char type.
+         */
         stream_delim(istream_type &stream, char_type const d = '\n')
           : stream_{ &stream }
           , delim_{ d }
-          , alive_{ std::getline(*stream_, string_, delim_) }
+          , alive_{ static_cast<bool>(std::getline(*stream_, string_, delim_)) }
         { }
 
         string_type& operator *() noexcept
@@ -44,7 +73,7 @@ namespace jtl
           if(!alive_)
           { throw std::out_of_range{ "invalid stream_delim iterator" }; }
 
-          alive_ = std::getline(*stream_, string_, delim_);
+          alive_ = static_cast<bool>(std::getline(*stream_, string_, delim_));
           return *this;
         }
         stream_delim operator ++(int) noexcept

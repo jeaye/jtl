@@ -16,6 +16,22 @@ namespace jtl
 {
   namespace iterator
   {
+    /* Similar to <jtl::iterator::back_insert>, but inserts ranges at a time.
+     *
+     * When you want to map a range of ranges to a single output, you
+     * can use a <jtl::it::multi_insert> or multi_back_insert iterator.
+     *
+     * Example:
+     * ```cpp
+     * // Each assignment is from std::vector<char> -> back of std::string
+     * std::vector<std::vector<char>> const v{ { '1', '2' }, { '3', '4' } };
+     * std::string out{ "existing: " };
+     * std::copy(v.begin(), v.end(),
+     *           jtl::iterator::multi_back_inserter(out));
+     * 
+     * // out == "existing: 1234"
+     * ```
+     */
     template <typename C>
     class multi_back_insert
       : public std::iterator<std::output_iterator_tag,

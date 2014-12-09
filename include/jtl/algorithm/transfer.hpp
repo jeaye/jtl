@@ -33,8 +33,8 @@ namespace jtl
 
     /* Similar to std::move, but operates based on a transfer policy.
      *
-     * If the policy is jtl::alg::policy::move, this call has the same
-     * effect as std::move. If it's instead jtl::alg::policy::copy, no
+     * If the policy is <jtl::algorithm::policy::move>, this call has the same
+     * effect as std::move. If it's instead <jtl::algorithm::policy::copy>, no
      * moving will be done.
      */
     template <policy::transfer P, typename T>

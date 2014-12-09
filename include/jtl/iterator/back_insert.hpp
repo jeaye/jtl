@@ -16,6 +16,12 @@ namespace jtl
 {
   namespace iterator
   {
+    /* A drop-in replacement for std::back_insert_iterator.
+     * 
+     * The insert iterators in the stdlib are flawed in that
+     * their iterator_traits use only void types. Until this
+     * is resolved, such iterators will be in jtl.
+     */
     template <typename C>
     class back_insert
       : public std::iterator<std::output_iterator_tag,
@@ -52,6 +58,10 @@ namespace jtl
         C &container_;
     };
 
+    /* A drop-in replacement for std::back_inserter.
+     *
+     * Compliments <jtl::iterator::back_insert>.
+     */
     template <typename C>
     back_insert<C> back_inserter(C &c)
     { return { c }; }
