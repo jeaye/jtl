@@ -26,9 +26,8 @@ namespace jtl
       B_It consume(B_It begin, O_It out,
                    std::integer_sequence<std::size_t, Ns...> const)
       {
-        std::size_t _{}; /* Swallows the pack usage. */
         *out = std::move(typename std::iterator_traits<O_It>::value_type
-        { (_ += Ns, transfer<P>(*begin++))... });
+        { (Ns, transfer<P>(*begin++))... });
         return begin;
       }
     }

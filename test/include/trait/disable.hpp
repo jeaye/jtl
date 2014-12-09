@@ -73,4 +73,18 @@ namespace jest
     std::vector<jtl::trait::disable_t<int, void, float, std::string>> _;
     static_cast<void>(_);
   }
+
+  template <> template <>
+  void jtl::disable_group::test<6>() /* value */
+  {
+    jtl::constexpr_test<jtl::trait::disable_value<int, 0>()> _;
+    static_cast<void>(_);
+  }
+
+  template <> template <>
+  void jtl::disable_group::test<7>() /* value type */
+  {
+    jtl::constexpr_test<jtl::trait::disable_value_t<int, 0>::value> _;
+    static_cast<void>(_);
+  }
 }
