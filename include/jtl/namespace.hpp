@@ -3,7 +3,11 @@
 namespace jtl
 {
   namespace algorithm
-  { }
+  {
+    namespace policy
+    { }
+    namespace pol = policy;
+  }
   namespace alg = algorithm;
 
   namespace iterator
