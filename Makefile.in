@@ -14,7 +14,7 @@ INCLUDEDIR = %INCLUDEDIR%
 # Compiler flags
 CXX ?= c++
 CXX_WARN_FLAGS = -Wall -Wextra -Werror -pedantic
-CXX_NO_WARN_FLAGS = -Wno-unused-value
+CXX_NO_WARN_FLAGS =
 CXX_DEBUG_FLAGS = 
 CXX_OPTIM_FLAGS = -ggdb
 CXX_INCLUDE_FLAGS = -Itest/include -Iinclude -Ilib/jest/include

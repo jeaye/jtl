@@ -27,7 +27,7 @@ namespace jtl
                    std::integer_sequence<std::size_t, Ns...> const)
       {
         *out = std::move(typename std::iterator_traits<O_It>::value_type
-        { (Ns, transfer<P>(*begin++))... });
+        { (static_cast<void>(Ns), transfer<P>(*begin++))... });
         return begin;
       }
     }
