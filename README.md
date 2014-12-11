@@ -75,8 +75,8 @@ Most namespaces come with an alias for shorthand access. For example, `jtl::algo
 
 ### trait
 
-  * [disable](), [disable_t]()
-    *Unconditionally returns false, consuming all types*
+  * [disable](), [disable_t](), [disable_value](), [disable_value_t]()
+    *Unconditionally returns false, consuming all types/values*
     ```cpp
     template <typename T>
     char const* name()
@@ -85,6 +85,15 @@ Most namespaces come with an alias for shorthand access. For example, `jtl::algo
     template <>
     char const* name<int>()
     { return "int"; }
+    ```
+  * [show]()
+    *Fails compilation using the type pack in order to display each type*
+    ```cpp
+    // Will halt the compiler and output the typenames
+
+    template <typename... Args>
+    void what_is_going_on()
+    { show<Args...>(); } 
     ```
 
 # License
