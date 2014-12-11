@@ -22,7 +22,7 @@ namespace jtl
   {
     namespace detail
     {
-      template <policy::transfer P, std::size_t... Ns, typename B_It, typename O_It>
+      template <policy::transfer P, typename B_It, typename O_It, std::size_t... Ns>
       B_It consume(B_It begin, O_It out,
                    std::integer_sequence<std::size_t, Ns...> const)
       {
