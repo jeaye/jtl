@@ -39,11 +39,11 @@ namespace jtl
      *
      * ```cpp
      * auto const points{ 0, 1, 2, 3, 4, 5 };
-     * std::vector<triangle> output(2);
-     * consume<3>(std::begin(input), std::end(input), std::begin(output));
+     * std::vector<triangle> tris(2);
+     * consume<3>(points.begin(), points.end(), tris.begin());
      * ```
      *
-     * `output` will be `{ { 0, 1, 2 }, { 3, 4, 5 } }`.
+     * `tris` will be `{ { 0, 1, 2 }, { 3, 4, 5 } }`.
      * 
      * Transfer will follow the Policy, which defaults to
      * <jtl::algorithm::policy::transfer::move> but may be specified as
