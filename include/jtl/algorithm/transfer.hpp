@@ -48,7 +48,7 @@ namespace jtl
     auto transfer(T &&t)
     { return detail::transferrer<P>{}(std::forward<T>(t)); }
 
-    /* Transfers with a move polify if <B> is true. Otherwise, copies.  */
+    /* Transfers with a move policy if <B> is true. Otherwise, copies.  */
     template <bool B, typename T>
     auto move_if(T &&t)
     { return transfer<detail::should_move<B>>(std::forward<T>(t)); }
