@@ -16,7 +16,7 @@ namespace jtl
 {
   namespace iterator
   {
-    /* A drop-in replacement for std::insert_iterator.
+    /* A drop-in, improved replacement for std::insert_iterator.
      * 
      * The insert iterators in the stdlib are flawed in that
      * their iterator_traits use only void types. Until this

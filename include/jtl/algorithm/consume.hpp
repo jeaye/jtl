@@ -41,9 +41,10 @@ namespace jtl
      * auto const points{ 0, 1, 2, 3, 4, 5 };
      * std::vector<triangle> tris(2);
      * consume<3>(points.begin(), points.end(), tris.begin());
+     * 
+     * // points has been moved from; use consume_copy to prevent moving
+     * // tris == { { 0, 1, 2 }, { 3, 4, 5 } }
      * ```
-     *
-     * `tris` will be `{ { 0, 1, 2 }, { 3, 4, 5 } }`.
      * 
      * Transfer will follow the Policy, which defaults to
      * <jtl::algorithm::policy::transfer::move> but may be specified as
