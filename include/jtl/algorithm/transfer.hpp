@@ -34,7 +34,7 @@ namespace jtl
       policy::transfer constexpr should_move()
       { return policy::transfer::move; }
       template <>
-      policy::transfer constexpr should_move<false>()
+      inline policy::transfer constexpr should_move<false>()
       { return policy::transfer::copy; }
     }
 
@@ -45,12 +45,12 @@ namespace jtl
      * moving will be done.
      */
     template <policy::transfer P, typename T>
-    auto transfer(T &&t)
+    decltype(auto) transfer(T &&t)
     { return detail::transferrer<P>{}(std::forward<T>(t)); }
 
     /* Transfers with a move policy if <B> is true. Otherwise, copies.  */
     template <bool B, typename T>
-    auto move_if(T &&t)
+    decltype(auto) move_if(T &&t)
     { return transfer<detail::should_move<B>>(std::forward<T>(t)); }
   }
 }

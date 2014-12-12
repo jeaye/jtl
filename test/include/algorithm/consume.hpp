@@ -144,6 +144,6 @@ namespace jest
     jtl::algorithm::consume_copy<2>(std::begin(in), std::end(in), std::begin(out));
 
     /* First copied into their new home, then that home is copied into the vector. */
-    expect_equal(jtl::tracked_copy::count, 18ul);
+    expect_equal(jtl::tracked_copy::count, 12ul);
   }
 }

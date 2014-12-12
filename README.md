@@ -11,11 +11,15 @@ There exists generated documentation \<TODO\> which should suffice as a referenc
 Most namespaces come with an alias for shorthand access. For example, `jtl::algorithm` can be accessed as `jtl::alg`.
 
   * [algorithm]() (alg)
+    *Algorithms similar to that of \<algorithm\>*
+  * [algorithm]() (alg)
     *A collection of algorithms similar to that of \<algorithm\>*
+    * [policy]() (pol)
+      *Policies which jtl algorithms support*
   * [iterator]() (it)
-    *A collection of iterator types similar to that of \<iterator\>*
+    *iterator types similar to that of \<iterator\>*
   * [trait]()
-    *A collection of traits and other meta-functions similar to that of \<type_traits\>*
+    *Traits and other meta-functions similar to that of \<type_traits\>*
 
 ## A deeper look
 
