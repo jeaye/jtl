@@ -74,6 +74,12 @@ namespace jtl
 
     T first, second;
   };
+
+  void reset()
+  {
+    tracked_copy::count = 0;
+    tracked_move::count = 0;
+  }
 }
 
 namespace jest
@@ -128,22 +134,28 @@ namespace jest
   template <> template <>
   void jtl::consume_group::test<3>() /* move */
   {
+    jtl::reset();
+
     std::vector<jtl::tracked_move> in(6);
     std::vector<jtl::tracked_eater<jtl::tracked_move>> out(3);
     jtl::algorithm::consume<2>(std::begin(in), std::end(in), std::begin(out));
 
     /* First moved into their new home, then that home is moved into the vector. */
     expect_equal(jtl::tracked_move::count, 18ul);
+    expect_equal(jtl::tracked_copy::count, 0ul);
   }
 
   template <> template <>
   void jtl::consume_group::test<4>() /* copy */
   {
+    jtl::reset();
+
     std::vector<jtl::tracked_copy> in(6);
     std::vector<jtl::tracked_eater<jtl::tracked_copy>> out(3);
     jtl::algorithm::consume_copy<2>(std::begin(in), std::end(in), std::begin(out));
 
     /* First copied into their new home, then that home is copied into the vector. */
     expect_equal(jtl::tracked_copy::count, 12ul);
+    expect_equal(jtl::tracked_move::count, 0ul);
   }
 }
