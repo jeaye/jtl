@@ -3,7 +3,7 @@
   See licensing at:
     http://opensource.org/licenses/MIT
 
-  File: include/iterator/transmute.hpp
+  File: include/iterator/transmute_back_insert.hpp
   Author: Jesse 'Jeaye' Wilkerson
 */
 
@@ -34,7 +34,7 @@ namespace jtl
      * ```
      */
     template <typename C, typename It>
-    class transmute
+    class transmute_back_insert
       : public std::iterator<std::output_iterator_tag,
           typename std::iterator_traits
           <
@@ -45,13 +45,13 @@ namespace jtl
         using iterator = decltype(std::begin(std::declval<C&>()));
         using value_type = typename std::iterator_traits<iterator>::value_type;
 
-        transmute() = delete;
-        transmute(C &c)
+        transmute_back_insert() = delete;
+        transmute_back_insert(C &c)
           : container_{ c }
         { }
 
         template <typename T>
-        transmute& operator =(T &&c)
+        transmute_back_insert& operator =(T &&c)
         {
           value_type v;
           std::copy(std::begin(c), std::end(c), It(v));
@@ -60,20 +60,20 @@ namespace jtl
         }
 
         /* NOP */
-        transmute& operator *() noexcept
+        transmute_back_insert& operator *() noexcept
         { return *this; }
-        transmute& operator ++() noexcept
+        transmute_back_insert& operator ++() noexcept
         { return *this; }
-        transmute& operator ++(int) noexcept
+        transmute_back_insert& operator ++(int) noexcept
         { return *this; }
 
       private:
         C &container_;
     };
 
-    /* Creates a <jtl::iterator::transmute> iterator. */
+    /* Creates a <jtl::iterator::transmute_back_insert> iterator. */
     template <typename C>
-    transmute<C, std::back_insert_iterator<
+    transmute_back_insert<C, std::back_insert_iterator<
       typename std::iterator_traits<
         decltype(std::begin(std::declval<C&>()))>::value_type>>
       transmute_back_inserter(C &c)

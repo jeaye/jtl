@@ -56,7 +56,7 @@ Most namespaces come with an alias for shorthand access. For example, `jtl::algo
     std::stringstream ss{ "0\n1\n2\n3" };
     std::vector<std::string> lines;
 
-    std::copy(jtl::iterator::stream_delim<>{ ss },
+    std::copy(jtl::iterator::stream_delim<>{ ss }, // default: '\n'
               jtl::iterator::stream_delim<>{},
               std::back_inserter(lines));
     ```
@@ -72,7 +72,7 @@ Most namespaces come with an alias for shorthand access. For example, `jtl::algo
     
     // out == "{[d][a][t][a]}"
     ```
-  * [transmute]()
+  * [transmute_back_insert]()
     *Transmutes output of T\<E\> to T2\<E\>*
     ```cpp
     std::stringstream ss{ "w0|w1|w2" };
