@@ -65,6 +65,7 @@ namespace jtl
         C &container_;
     };
 
+    /* Creates a <jtl::iterator::multi_back_insert> iterator. */
     template <typename C>
     multi_back_insert<C> multi_back_inserter(C &c)
     { return { c }; }

@@ -12,12 +12,10 @@ Most namespaces come with an alias for shorthand access. For example, `jtl::algo
 
   * [algorithm]() (alg)
     *Algorithms similar to that of \<algorithm\>*
-  * [algorithm]() (alg)
-    *A collection of algorithms similar to that of \<algorithm\>*
     * [policy]() (pol)
       *Policies which jtl algorithms support*
   * [iterator]() (it)
-    *iterator types similar to that of \<iterator\>*
+    *Iterator types similar to that of \<iterator\>*
   * [trait]()
     *Traits and other meta-functions similar to that of \<type_traits\>*
 
@@ -73,6 +71,19 @@ Most namespaces come with an alias for shorthand access. For example, `jtl::algo
     { return "[" + std::string{ c } + "]"; });
     
     // out == "{[d][a][t][a]}"
+    ```
+  * [transmute]()
+    *Transmutes output of T<E> to T2<E>*
+    ```cpp
+    std::stringstream ss{ "w0|w1|w2" };
+    std::vector<std::vector<char>> out;
+    std::copy(jtl::iterator::stream_delim<>{ ss, '|' },
+              jtl::iterator::stream_delim<>{},
+              jtl::iterator::transmute_back_inserter(out));
+    
+    // would normally expect vector<string>, but transmutation
+    // allows for other [compatible] container types.
+    // out == { { 'w', '0' }, { 'w', '1' }, { 'w', '2' } }
     ```
   * [insert](), [front_insert](), [back_insert]()
     *A drop-in, improved replacement for std::insert_iterator and the like*
