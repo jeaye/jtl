@@ -73,7 +73,7 @@ Most namespaces come with an alias for shorthand access. For example, `jtl::algo
     // out == "{[d][a][t][a]}"
     ```
   * [transmute]()
-    *Transmutes output of T<E> to T2<E>*
+    *Transmutes output of T\<E\> to T2\<E\>*
     ```cpp
     std::stringstream ss{ "w0|w1|w2" };
     std::vector<std::vector<char>> out;
