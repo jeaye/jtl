@@ -47,6 +47,19 @@ Most namespaces come with an alias for shorthand access. For example, `jtl::algo
 
     jtl::alg::move_if<true>(foo); // equivalent to std::move(foo)
     ```
+  * [trim](), [trim_left](), [trim_right]()
+    *Trims all trailing/leading vals*
+    ```cpp
+    std::string s{ "  \t meow\n\t" };
+    s.erase(jtl::alg::trim(s.begin(), s.end(), " \t\n"), s.end());
+
+    // s == "meow"
+
+    std::vector<int> v{ 42, 0, 1, 2, 8, 7 };
+    v.erase(jtl::alg::trim(v.begin(), v.end(), {42, 7, 8}), v.end());
+
+    // v == { 0, 1, 2 }
+    ```
 
 ### iterator
 

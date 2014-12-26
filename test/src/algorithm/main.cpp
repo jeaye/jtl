@@ -9,6 +9,7 @@
 #include <jest/jest.hpp>
 
 #include "algorithm/consume.hpp"
+#include "algorithm/trim.hpp"
 
 int main()
 {
