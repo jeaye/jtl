@@ -36,9 +36,8 @@ namespace jest
     expect(jtl::alg::getline(ss, line, "\n| "));
     expect_equal(line, "three");
 
-    expect(!jtl::alg::getline(ss, line, "\n| "));
+    expect(jtl::alg::getline(ss, line, "\n| "));
     expect_equal(line, "four");
-    expect(ss.eof());
 
     expect(!jtl::alg::getline(ss, line, "\n| "));
     expect_equal(line, "");
@@ -91,4 +90,12 @@ namespace jest
   /* The test machine may not have enough memory for this test. */
   catch(std::bad_alloc const&)
   { std::cerr << "skipping: (insufficient memory)" << std::endl; }
+
+  template <> template <>
+  void jtl::getline_group::test<5>() /* default delim */
+  {
+    std::stringstream ss{ "line0\nline1" };
+    std::string line;
+    jtl::alg::getline(ss, line);
+  }
 }

@@ -19,7 +19,7 @@ namespace jtl
 {
   namespace algorithm
   {
-    /* Follows std::getline exactly, but allows multiple delimiters.
+    /* Follows std::getline but allows multiple delimiters.
      *
      * Delimiters are specified as a generic collection. You can use strings,
      * initializer_lists, etc. All of the same preconditions, postconditions,
@@ -39,18 +39,24 @@ namespace jtl
      * // nums == [ "one", "two", "three", "four" ]
      * ```
      */
-    template<typename Char, typename Traits, typename Allocator, typename Ds>
+    template<typename Char, typename Traits, typename Allocator,
+             typename Ds = char const[2]>
     decltype(auto) getline(std::basic_istream<Char, Traits> &is,
                            std::basic_string<Char, Traits, Allocator> &str,
-                           Ds const &delims)
+                           Ds const &delims = "\n")
     {
       str.clear();
-      while(true)
+      while(is && !is.eof())
       {
         auto const ch(is.get());
         if(is.eof())
         {
-          is.setstate(is.eofbit);
+          is.clear();
+          if(str.size())
+          { is.setstate(is.eofbit); }
+          else
+          { is.setstate(is.eofbit | is.failbit); }
+
           return is;
         }
         else if(!is)
@@ -72,6 +78,8 @@ namespace jtl
         else
         { str.append(1, ch); }
       }
+      is.setstate(is.failbit);
+      return is;
     }
 
     /* Convenience wrapper for initializer_lists. */

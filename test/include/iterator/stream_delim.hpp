@@ -118,4 +118,35 @@ namespace jest
     expect_equal(lines.size(), 1ul);
     expect(lines[0].empty());
   }
+
+  template <> template <>
+  void jtl::stream_delim_group::test<7>() /* multi delim */
+  {
+    std::stringstream ss{ "zero\none two|three" };
+    std::vector<std::string> lines;
+    std::copy(jtl::iterator::stream_delim<>{ ss, " |\n" },
+              jtl::iterator::stream_delim<>{},
+              std::back_inserter(lines));
+    expect_equal(lines.size(), 4ul);
+    expect_equal(lines[0], "zero");
+    expect_equal(lines[1], "one");
+    expect_equal(lines[2], "two");
+    expect_equal(lines[3], "three");
+  }
+
+  template <> template <>
+  void jtl::stream_delim_group::test<8>() /* multi delim vector */
+  {
+    std::stringstream ss{ "zero\none two|three" };
+    std::vector<std::string> lines;
+    std::vector<char> delims{ ' ', '|', '\n' };
+    std::copy(jtl::iterator::stream_delim<>{ ss, delims },
+              jtl::iterator::stream_delim<>{},
+              std::back_inserter(lines));
+    expect_equal(lines.size(), 4ul);
+    expect_equal(lines[0], "zero");
+    expect_equal(lines[1], "one");
+    expect_equal(lines[2], "two");
+    expect_equal(lines[3], "three");
+  }
 }

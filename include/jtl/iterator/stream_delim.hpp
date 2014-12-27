@@ -12,8 +12,10 @@
 #include <string>
 #include <iterator>
 #include <stdexcept>
+#include <initializer_list>
 
 #include <jtl/namespace.hpp>
+#include <jtl/algorithm/getline.hpp>
 
 namespace jtl
 {
@@ -50,6 +52,7 @@ namespace jtl
         using traits_type = std::char_traits<C>;
         using istream_type = std::basic_istream<C, traits_type>;
         using string_type = std::basic_string<C, traits_type>;
+        using delims_type = string_type;
 
         stream_delim() = default;
         
@@ -60,9 +63,24 @@ namespace jtl
          */
         stream_delim(istream_type &stream, char_type const d = '\n')
           : stream_{ &stream }
-          , delim_{ d }
-          , alive_{ static_cast<bool>(std::getline(*stream_, string_, delim_)) }
+          , delims_{ d }
+          , alive_
+            { static_cast<bool>(jtl::alg::getline(*stream_, string_, delims_)) }
         { }
+
+        /* Constructs a new iterator using the input stream and multiple delimiters.
+         *
+         * The delimiter defaults to "\n" but can be any valid container
+         * compatible with the char type (such as a std::vector<char>).
+         */
+        template <typename Ds = char const[2]>
+        stream_delim(istream_type &stream, Ds const &delims = "\n")
+          : stream_{ &stream }
+        {
+          std::copy(std::begin(delims), std::end(delims),
+                    std::back_inserter(delims_));
+          alive_ = jtl::alg::getline(*stream_, string_, delims_);
+        }
 
         string_type& operator *() noexcept
         { return string_; }
@@ -74,7 +92,7 @@ namespace jtl
           if(!alive_)
           { throw std::out_of_range{ "invalid stream_delim iterator" }; }
 
-          alive_ = static_cast<bool>(std::getline(*stream_, string_, delim_));
+          alive_ = static_cast<bool>(jtl::alg::getline(*stream_, string_, delims_));
           return *this;
         }
         stream_delim operator ++(int) noexcept
@@ -95,7 +113,7 @@ namespace jtl
       private:
         istream_type *stream_{};
         string_type string_;
-        char_type delim_{ '\n' };
+        delims_type delims_{ "\n" };
         bool alive_{ false };
     };
   }
