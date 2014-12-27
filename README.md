@@ -60,6 +60,19 @@ Most namespaces come with an alias for shorthand access. For example, `jtl::algo
 
     // v == { 0, 1, 2 }
     ```
+  * [getline]()
+    *Follows std::getline but allows multiple delimiters*
+    ```cpp
+    std::stringstream ss{ "one\ntwo|three four" };
+    std::string nums[4];
+
+    jtl::alg::getline(ss, nums[0], "\n| ");
+    jtl::alg::getline(ss, nums[1], "\n| ");
+    jtl::alg::getline(ss, nums[2], "\n| ");
+    jtl::alg::getline(ss, nums[3], "\n| ");
+    
+    // nums == [ "one", "two", "three", "four" ]
+    ```
 
 ### iterator
 
