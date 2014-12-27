@@ -10,6 +10,7 @@
 
 #include "algorithm/consume.hpp"
 #include "algorithm/trim.hpp"
+#include "algorithm/split.hpp"
 
 int main()
 {
