@@ -11,6 +11,7 @@
 #include "algorithm/consume.hpp"
 #include "algorithm/trim.hpp"
 #include "algorithm/split.hpp"
+#include "algorithm/getline.hpp"
 
 int main()
 {
