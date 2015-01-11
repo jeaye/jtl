@@ -79,7 +79,8 @@ namespace jtl
         {
           std::copy(std::begin(delims), std::end(delims),
                     std::back_inserter(delims_));
-          alive_ = jtl::alg::getline(*stream_, string_, delims_);
+          alive_ = static_cast<bool>(jtl::alg::getline(*stream_, 
+                                                       string_, delims_));
         }
 
         string_type& operator *() noexcept

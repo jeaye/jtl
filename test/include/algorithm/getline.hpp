@@ -27,19 +27,19 @@ namespace jest
     std::stringstream ss{ "one\ntwo|three four" };
     std::string line;
 
-    expect(jtl::alg::getline(ss, line, "\n| "));
+    expect(static_cast<bool>(jtl::alg::getline(ss, line, "\n| ")));
     expect_equal(line, "one");
 
-    expect(jtl::alg::getline(ss, line, "\n| "));
+    expect(static_cast<bool>(jtl::alg::getline(ss, line, "\n| ")));
     expect_equal(line, "two");
 
-    expect(jtl::alg::getline(ss, line, "\n| "));
+    expect(static_cast<bool>(jtl::alg::getline(ss, line, "\n| ")));
     expect_equal(line, "three");
 
-    expect(jtl::alg::getline(ss, line, "\n| "));
+    expect(static_cast<bool>(jtl::alg::getline(ss, line, "\n| ")));
     expect_equal(line, "four");
 
-    expect(!jtl::alg::getline(ss, line, "\n| "));
+    expect(!static_cast<bool>(jtl::alg::getline(ss, line, "\n| ")));
     expect_equal(line, "");
     expect(ss.eof());
   }
