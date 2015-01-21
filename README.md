@@ -127,6 +127,8 @@ Most namespaces come with an alias for shorthand access. For example, `jtl::algo
     char const* name<int>()
     { return "int"; }
     ```
+  * [is_indirect]()
+    *Determines if a type can use operator->*
   * [show]()
     *Fails compilation using the type pack in order to display each type*
     ```cpp
@@ -134,7 +136,7 @@ Most namespaces come with an alias for shorthand access. For example, `jtl::algo
 
     template <typename... Args>
     void what_is_going_on()
-    { show<Args...>(); } 
+    { jtl::trait::show<Args...>(); } 
     ```
 
 # License
