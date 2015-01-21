@@ -112,7 +112,7 @@ Most namespaces come with an alias for shorthand access. For example, `jtl::algo
     // out == { { 'w', '0' }, { 'w', '1' }, { 'w', '2' } }
     ```
   * [make_range]()
-    *Creates a direct or indirect range of [begin, end)*
+    *Creates a direct or indirect range of `[begin, end)`*
     ```cpp
     // indirect range on std::vector::const_iterator
     std::vector<int> const v{ 0, 1, 2, 3 };
