@@ -19,11 +19,12 @@ namespace jtl
   {
     namespace detail
     {
+      /* Uses substitution failure to determin operator-> support. */
       template <typename T>
       struct is_indirect
       {
         template <typename TT>
-        static auto test(int) ->
+        static auto test(int const) ->
           decltype(std::declval<TT&>().operator->(), std::true_type());
 
         template <typename TT>

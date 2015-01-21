@@ -30,7 +30,7 @@ namespace jest
   template <> template <>
   void jtl::indirect_range_group::test<0>() /* Construction */
   {
-    jtl::iterator::detail::indirect_range<void*, void*> const r
+    jtl::iterator::range::indirect<void*, void*> const r
     { nullptr, nullptr };
 
     expect_equal(r.begin(), nullptr);
@@ -43,7 +43,7 @@ namespace jest
   void jtl::indirect_range_group::test<1>() /* Move construction */
   {
     int *begin{}, *end{};
-    jtl::iterator::detail::indirect_range<int*, int*> const r
+    jtl::iterator::range::indirect<int*, int*> const r
     { std::move(begin), std::move(end) };
 
     expect_equal(r.begin(), nullptr);
@@ -65,7 +65,7 @@ namespace jest
   template <> template <>
   void jtl::direct_range_group::test<0>() /* Construction */
   {
-    jtl::iterator::detail::direct_range<int, int> const r{ 0, 42 };
+    jtl::iterator::range::direct<int, int> const r{ 0, 42 };
 
     expect_equal(*r.begin(), 0);
     expect_equal(*r.cbegin(), 0);
@@ -77,7 +77,7 @@ namespace jest
   void jtl::direct_range_group::test<1>() /* Move construction */
   {
     int begin{}, end{ 42 };
-    jtl::iterator::detail::direct_range<int, int> const r
+    jtl::iterator::range::direct<int, int> const r
     { std::move(begin), std::move(end) };
 
     expect_equal(*r.begin(), 0);

@@ -111,6 +111,20 @@ Most namespaces come with an alias for shorthand access. For example, `jtl::algo
     // allows for other [compatible] container types.
     // out == { { 'w', '0' }, { 'w', '1' }, { 'w', '2' } }
     ```
+  * [make_range]()
+    *Creates a direct or indirect range of [begin, end)*
+    ```cpp
+    // indirect range on std::vector::const_iterator
+    std::vector<int> const v{ 0, 1, 2, 3 };
+    for(auto const i : jtl::it::make_range(v.begin(), std::next(v.begin(), 2)))
+    { std::cout << i << " "; }
+    // output: 0 1
+
+    // direct range on int values
+    for(auto const i : jtl::it::make_range(0, 10))
+    { std::cout << i << " "; }
+    // output: 0 1 2 3 4 5 6 7 8 9
+    ```
   * [insert](), [front_insert](), [back_insert]()
     *A drop-in, improved replacement for std::insert_iterator and the like*
 
