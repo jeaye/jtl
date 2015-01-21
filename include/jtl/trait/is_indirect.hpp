@@ -19,7 +19,7 @@ namespace jtl
   {
     namespace detail
     {
-      /* Uses substitution failure to determin operator-> support. */
+      /* Uses substitution failure to determine operator-> support. */
       template <typename T>
       struct is_indirect
       {
