@@ -3,7 +3,8 @@ OUT_DIR = bin/
 SOURCES =  \
 				 	test/src/iterator/main.cpp \
 				 	test/src/trait/main.cpp \
-				 	test/src/algorithm/main.cpp
+				 	test/src/algorithm/main.cpp \
+				 	test/src/container/main.cpp
 OBJECTS = ${SOURCES:.cpp=.cpp.o}
 TEST_OBJECTS = $(SOURCES:.cpp=.test)
 

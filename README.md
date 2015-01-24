@@ -16,6 +16,8 @@ Most namespaces come with an alias for shorthand access. For example, `jtl::algo
       *Policies which jtl algorithms support*
   * [iterator]() (it)
     *Iterator types similar to that of \<iterator\>*
+  * [container]()
+    *Containers and container utilities*
   * [trait]()
     *Traits and other meta-functions similar to that of \<type_traits\>*
 
@@ -127,6 +129,10 @@ Most namespaces come with an alias for shorthand access. For example, `jtl::algo
     ```
   * [insert](), [front_insert](), [back_insert]()
     *A drop-in, improved replacement for std::insert_iterator and the like*
+
+### container
+  * [make_array]()
+    *Builds an std::array, deducing type and arity*
 
 ### trait
 

@@ -20,4 +20,9 @@ namespace jtl
   /* Traits and other meta-functions similar to that of \<type_traits\>. */
   namespace trait
   { }
+
+  /* Containers and container utilities. */
+  namespace container
+  { }
+  namespace cont = container;
 }
