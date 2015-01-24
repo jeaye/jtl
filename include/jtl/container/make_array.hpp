@@ -17,7 +17,7 @@ namespace jtl
 {
   namespace container
   {
-    /* Builds an std::array, deducing type and arity. */
+    /* Builds a std::array, deducing type and arity. */
     template <typename... Ts>
     auto constexpr make_array(Ts &&...ts) ->
       std::array<std::decay_t<std::common_type_t<Ts...>>, sizeof...(Ts)>
