@@ -18,10 +18,19 @@ namespace jtl
   namespace algorithm
   {
     /* Follows std::transform but allows skipping of items.
+     * 
+     * The unary function shall be of compatible type:
+     *
+     * ```cpp
+     * std::experimental::optional<T> (auto const &val)
+     * ```
+     *
+     * The returned optional will determine whether or not the
+     * value is used. To skip an item, return an empty optional.
      *
      * Example:
      * ```cpp
-     * std::vector<int> v{ 0, 1, 2, 3, 4 };
+     * std::vector<int> const v{ 0, 1, 2, 3, 4 };
      * std::vector<std::string> out;
      * jtl::alg::transform_if(v.begin(), v.end(), jtl::it::back_inserter(out),
      *                        [](auto const i)

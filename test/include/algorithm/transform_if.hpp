@@ -28,7 +28,7 @@ namespace jest
   template <> template <>
   void jtl::transform_if_group::test<0>() /* unary */
   {
-    std::vector<int> v{ 0, 1, 2, 3, 4 };
+    std::vector<int> const v{ 0, 1, 2, 3, 4 };
     std::vector<std::string> out;
     jtl::alg::transform_if(v.begin(), v.end(), jtl::it::back_inserter(out),
                            [](auto const i)
@@ -47,8 +47,8 @@ namespace jest
   template <> template <>
   void jtl::transform_if_group::test<1>() /* binary */
   {
-    std::vector<int> v1{ 0, 1, 2, 3, 4 };
-    std::vector<int> v2{ 1, 2, 3, 4, 5 };
+    std::vector<int> const v1{ 0, 1, 2, 3, 4 };
+    std::vector<int> const v2{ 1, 2, 3, 4, 5 };
     std::vector<std::string> out;
     jtl::alg::transform_if(v1.begin(), v1.end(), v2.begin(), 
                            jtl::it::back_inserter(out),
