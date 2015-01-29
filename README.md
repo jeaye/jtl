@@ -104,6 +104,8 @@ Most namespaces come with an alias for shorthand access. For example, `jtl::algo
     std::copy(jtl::iterator::stream_delim<>{ ss }, // default: '\n'
               jtl::iterator::stream_delim<>{},
               std::back_inserter(lines));
+
+    // lines == { "0", "1", "2", "3" }
     ```
   * [multi_insert](), [multi_back_insert]()
     *Inserts ranges at a time*
@@ -137,11 +139,13 @@ Most namespaces come with an alias for shorthand access. For example, `jtl::algo
     std::vector<int> const v{ 0, 1, 2, 3 };
     for(auto const i : jtl::it::make_range(v.begin(), std::next(v.begin(), 2)))
     { std::cout << i << " "; }
+
     // output: 0 1
 
     // direct range on int values
     for(auto const i : jtl::it::make_range(0, 10))
     { std::cout << i << " "; }
+
     // output: 0 1 2 3 4 5 6 7 8 9
     ```
   * [insert](), [front_insert](), [back_insert]()
@@ -150,6 +154,16 @@ Most namespaces come with an alias for shorthand access. For example, `jtl::algo
 ### container
   * [make_array]()
     *Builds an std::array, deducing type and arity*
+    ```cpp
+    auto constexpr arr(jtl::cont::make_array(1, 2, 3));
+
+    // decltype(arr) == std::array<int, 3>
+
+    auto arr(jtl::cont::make_array(std::string{ "1" }, "2"));
+
+    // Uses std::common_type to deduce "2" to std::string
+    // decltype(arr) == std::array<std::string, 2>
+    ```
 
 ### trait
 
