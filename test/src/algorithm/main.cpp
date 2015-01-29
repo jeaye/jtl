@@ -12,6 +12,7 @@
 #include "algorithm/trim.hpp"
 #include "algorithm/split.hpp"
 #include "algorithm/getline.hpp"
+#include "algorithm/transform_if.hpp"
 
 int main()
 {
