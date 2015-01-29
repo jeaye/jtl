@@ -76,7 +76,7 @@ Most namespaces come with an alias for shorthand access. For example, `jtl::algo
     // nums == [ "one", "two", "three", "four" ]
     ```
   * [transform_if]()
-    * Follows std::transform but allows skipping of items*
+    *Follows std::transform but allows skipping of items*
     ```cpp
     std::vector<int> v{ 0, 1, 2, 3, 4 };
     std::vector<std::string> out;
