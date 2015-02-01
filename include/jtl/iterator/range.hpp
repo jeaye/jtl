@@ -51,12 +51,9 @@ namespace jtl
      * ```
      */
     template <typename Begin, typename End = Begin>
-    auto make_range(Begin &&begin, End &&end,
+    auto make_range(Begin const &begin, End const &end,
                     std::enable_if_t<!trait::is_indirect<Begin>(), bool> = true)
-    {
-      return range::direct<Begin, End>
-      { std::forward<Begin>(begin), std::forward<End>(end) };
-    }
+    { return range::direct<Begin, End>{ begin, end }; }
 
     /* Shorthand for building a range to cover a whole container. */
     template <typename Container>
