@@ -34,10 +34,6 @@ namespace jtl
             : begin_{ begin }
             , end_{ end }
           { }
-          indirect(Begin &&begin, End &&end)
-            : begin_{ std::move(begin) }
-            , end_{ std::move(end) }
-          { }
 
           Begin begin()
           { return begin_; }
