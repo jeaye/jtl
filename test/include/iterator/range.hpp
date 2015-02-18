@@ -102,5 +102,16 @@ namespace jest
     int index{};
     for(auto const f : jtl::it::make_range(vec))
     { expect_equal(f, vec[index++]); }
+    expect_equal(index, 3);
+  }
+
+  template <> template <>
+  void jtl::direct_range_group::test<4>() /* From size */
+  {
+    std::vector<float> const vec{ 1.11f, 2.22f, 3.33f };
+    std::size_t index{};
+    for(auto const i : jtl::it::make_range(vec.size()))
+    { expect_equal(i, index++); }
+    expect_equal(index, 3ul);
   }
 }

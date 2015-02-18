@@ -56,8 +56,20 @@ namespace jtl
     { return range::detail::direct_container<Begin, End>{ begin, end }; }
 
     /* Shorthand for building a range to cover a whole container. */
-    template <typename Container>
-    auto make_range(Container &&c)
+    template <typename C>
+    auto make_range(C const &c, decltype(std::begin(c)) = {})
     { return make_range(std::begin(c), std::end(c)); }
+
+    /* Shorthand for building a range of [V{}, v). */
+    template <typename V>
+    std::enable_if_t
+    <
+      std::is_integral
+      <
+        std::decay_t<V>
+      >::value,
+      range::detail::direct_container<V, V>
+    > make_range(V const &v)
+    { return range::detail::direct_container<V, V>{ V{}, v }; }
   }
 }

@@ -56,20 +56,25 @@ namespace jtl
             return ++copy;
           }
 
-          template <typename B, typename E = B>
+          template <typename B, typename E>
           friend bool operator ==(direct<B, E> const &lhs,
-                                  direct<B, E> const &rhs)
-          { return lhs.current_ == rhs.current_; }
-          template <typename B, typename E = B>
+                                  direct<B, E> const &rhs);
+          template <typename B, typename E>
           friend bool operator !=(direct<B, E> const &lhs,
-                                  direct<B, E> const &rhs)
-          { return lhs.current_ != rhs.current_; }
+                                  direct<B, E> const &rhs);
 
         private:
           Begin begin_;
           End end_;
           T current_;
       };
+
+      template <typename B, typename E = B>
+      bool operator ==(direct<B, E> const &lhs, direct<B, E> const &rhs)
+      { return lhs.current_ == rhs.current_; }
+      template <typename B, typename E = B>
+      bool operator !=(direct<B, E> const &lhs, direct<B, E> const &rhs)
+      { return lhs.current_ != rhs.current_; }
     }
   }
 }
