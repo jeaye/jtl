@@ -11,7 +11,7 @@
 #include <iterator>
 
 #include <jtl/namespace.hpp>
-#include <jtl/iterator/range/direct.hpp>
+#include <jtl/iterator/range/detail/direct_container.hpp>
 #include <jtl/iterator/range/indirect.hpp>
 #include <jtl/trait/is_indirect.hpp>
 
@@ -53,7 +53,7 @@ namespace jtl
     template <typename Begin, typename End = Begin>
     auto make_range(Begin const &begin, End const &end,
                     std::enable_if_t<!trait::is_indirect<Begin>(), bool> = true)
-    { return range::direct<Begin, End>{ begin, end }; }
+    { return range::detail::direct_container<Begin, End>{ begin, end }; }
 
     /* Shorthand for building a range to cover a whole container. */
     template <typename Container>

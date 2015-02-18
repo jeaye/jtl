@@ -9,8 +9,7 @@
 #pragma once
 
 #include <utility>
-
-#include <jtl/namespace.hpp>
+#include <stdexcept>
 
 namespace jtl
 {
@@ -18,14 +17,7 @@ namespace jtl
   {
     namespace range
     {
-      /* Provides container-like access to a range of direct iterators.
-       *
-       * Direct iterators are non-pointer values which do not provide
-       * operator->; this is determined using <jtl::trait::is_indirect>.
-       * 
-       * Example direct iterator: int
-       */
-      template <typename Begin, typename End = Begin>
+      template <typename T, typename Begin, typename End = Begin>
       class direct
       {
         public:
@@ -33,29 +25,50 @@ namespace jtl
           direct(Begin const &begin, End const &end)
             : begin_{ begin }
             , end_{ end }
+            , current_{ begin_ }
           { }
-          direct(Begin &&begin, End &&end)
-            : begin_{ std::move(begin) }
-            , end_{ std::move(end) }
+          direct(Begin const &begin, End const &end, T const current)
+            : begin_{ begin }
+            , end_{ end }
+            , current_{ current }
           { }
 
-          Begin* begin()
-          { return &begin_; }
-          Begin const* begin() const
-          { return &begin_; }
-          Begin const* cbegin() const
-          { return &begin_; }
+          T& operator *()
+          { return current_; }
+          T const& operator *() const
+          { return current_; }
 
-          Begin* end()
-          { return &end_; }
-          Begin const* end() const
-          { return &end_; }
-          Begin const* cend() const
-          { return &end_; }
+          T* operator ->()
+          { return &current_; }
+          T const* operator ->() const
+          { return &current_; }
+
+          direct& operator ++()
+          {
+            if(current_ == end_)
+            { throw std::range_error{ "beyond-end iterator" }; }
+            ++current_;
+            return *this;
+          }
+          direct& operator ++(int const) const
+          {
+            auto const copy(*this);
+            return ++copy;
+          }
+
+          template <typename B, typename E = B>
+          friend bool operator ==(direct<B, E> const &lhs,
+                                  direct<B, E> const &rhs)
+          { return lhs.current_ == rhs.current_; }
+          template <typename B, typename E = B>
+          friend bool operator !=(direct<B, E> const &lhs,
+                                  direct<B, E> const &rhs)
+          { return lhs.current_ != rhs.current_; }
 
         private:
           Begin begin_;
           End end_;
+          T current_;
       };
     }
   }

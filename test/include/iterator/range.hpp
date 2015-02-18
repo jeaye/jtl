@@ -63,34 +63,26 @@ namespace jest
   }
 
   template <> template <>
-  void jtl::direct_range_group::test<0>() /* Construction */
+  void jtl::direct_range_group::test<0>() /* Container */
   {
-    jtl::iterator::range::direct<int, int> const r{ 0, 42 };
+    jtl::it::range::detail::direct_container<int, int, int> dc
+    { 0, 42 };
+    expect_equal(*dc.begin(), 0);
+    expect_equal(*dc.end(), 42);
 
-    expect_equal(*r.begin(), 0);
-    expect_equal(*r.cbegin(), 0);
-    expect_equal(*r.end(), 42);
-    expect_equal(*r.cend(), 42);
+    expect_equal(*(++dc.begin()), 1);
   }
 
   template <> template <>
-  void jtl::direct_range_group::test<1>() /* Move construction */
-  {
-    int begin{}, end{ 42 };
-    jtl::iterator::range::direct<int, int> const r
-    { std::move(begin), std::move(end) };
-
-    expect_equal(*r.begin(), 0);
-    expect_equal(*r.cbegin(), 0);
-    expect_equal(*r.end(), 42);
-    expect_equal(*r.cend(), 42);
-  }
-
-  template <> template <>
-  void jtl::direct_range_group::test<2>() /* Algorithms */
+  void jtl::direct_range_group::test<1>() /* Range-based for */
   {
     int should_be{};
     for(auto const &i : jtl::it::make_range(0, 3))
     { expect_equal(i, should_be++); }
+    expect_equal(should_be, 3);
+
+    for(auto const &i : jtl::it::make_range(should_be, should_be + 5))
+    { expect_equal(i, should_be++); }
+    expect_equal(should_be, 8);
   }
 }
