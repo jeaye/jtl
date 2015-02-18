@@ -85,4 +85,22 @@ namespace jest
     { expect_equal(i, should_be++); }
     expect_equal(should_be, 8);
   }
+
+  template <> template <>
+  void jtl::direct_range_group::test<2>() /* Arrays */
+  {
+    float constexpr arr[]{ 1.11f, 2.22f, 3.33f };
+    int index{};
+    for(auto const f : jtl::it::make_range(arr))
+    { expect_equal(f, arr[index++]); }
+  }
+
+  template <> template <>
+  void jtl::direct_range_group::test<3>() /* Containers */
+  {
+    std::vector<float> const vec{ 1.11f, 2.22f, 3.33f };
+    int index{};
+    for(auto const f : jtl::it::make_range(vec))
+    { expect_equal(f, vec[index++]); }
+  }
 }
