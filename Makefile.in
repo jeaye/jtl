@@ -4,7 +4,8 @@ SOURCES =  \
 				 	test/src/iterator/main.cpp \
 				 	test/src/trait/main.cpp \
 				 	test/src/algorithm/main.cpp \
-				 	test/src/container/main.cpp
+				 	test/src/container/main.cpp \
+				 	test/src/odr/main.cpp
 OBJECTS = ${SOURCES:.cpp=.cpp.o}
 TEST_OBJECTS = $(SOURCES:.cpp=.test)
 
@@ -16,7 +17,7 @@ INCLUDEDIR = %INCLUDEDIR%
 CXX ?= c++
 CXX_WARN_FLAGS = -Wall -Wextra -Werror -pedantic
 CXX_NO_WARN_FLAGS =
-CXX_DEBUG_FLAGS = 
+CXX_DEBUG_FLAGS =
 CXX_OPTIM_FLAGS = -ggdb
 CXX_INCLUDE_FLAGS = -Itest/include -Iinclude -Ilib/jest/include
 CXX_PLATFORM_FLAGS = %CXX_PLATFORM_FLAGS%
@@ -55,6 +56,11 @@ ${PROJECT}_setup: setup
 	echo "  Compiling $<"
 	mkdir -p ${OUT_DIR}$(dir $(shell echo $< | sed 's_test/src/__')) > /dev/null
 	${CXX} ${CXX_FLAGS} $< ${LD_LIBS} -o ${OUT_DIR}$(shell echo "$(shell echo $< | sed 's/\.cpp//')" | sed 's_test/src/__') > /dev/null
+
+test/src/odr/main.cpp.o: ${PROJECT}_setup
+	echo "  Validating ODR"
+	mkdir -p ${OUT_DIR}$(dir $(shell echo test/src/odr/main.cpp | sed 's_test/src/__')) > /dev/null
+	${CXX} ${CXX_FLAGS} test/src/odr/main1.cpp test/src/odr/main2.cpp ${LD_LIBS} -o ${OUT_DIR}$(shell echo "$(shell echo test/src/odr/main.cpp | sed 's/\.cpp//')" | sed 's_test/src/__') > /dev/null
 
 install:
 	export installdir=${DESTDIR}${INCLUDEDIR} && \
