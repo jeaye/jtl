@@ -55,7 +55,7 @@ namespace jest
   template <> template <>
   void jtl::indirect_range_group::test<2>() /* Algorithms */
   {
-    auto const arr{ 0, 1, 2 };
+    std::initializer_list<int> const arr{ 0, 1, 2 };
 
     int should_be{};
     for(auto const &i : jtl::it::make_range(std::begin(arr), std::end(arr)))
