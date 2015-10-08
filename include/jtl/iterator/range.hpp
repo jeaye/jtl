@@ -9,6 +9,7 @@
 #pragma once
 
 #include <iterator>
+#include <type_traits>
 
 #include <jtl/namespace.hpp>
 #include <jtl/iterator/range/detail/direct_container.hpp>
@@ -21,7 +22,7 @@ namespace jtl
   {
     /* Builds an indirect range of [begin, end).
      * See <jtl::iterator::range::indirect>.
-     * 
+     *
      * Example:
      * ```cpp
      * std::vector<int> const v{ 0, 1, 2, 3 };
@@ -35,13 +36,13 @@ namespace jtl
     auto make_range(Begin &&begin, End &&end,
                     std::enable_if_t<trait::is_indirect<Begin>(), bool> = true)
     {
-      return range::indirect<Begin, End>
+      return range::indirect<std::decay_t<Begin>, std::decay_t<End>>
       { std::forward<Begin>(begin), std::forward<End>(end) };
     }
 
     /* Builds an direct range of [begin, end).
      * See <jtl::iterator::range::direct>.
-     * 
+     *
      * Example:
      * ```cpp
      * for(auto const i : jtl::it::make_range(0, 10))
@@ -53,7 +54,11 @@ namespace jtl
     template <typename Begin, typename End = Begin>
     auto make_range(Begin const &begin, End const &end,
                     std::enable_if_t<!trait::is_indirect<Begin>(), bool> = true)
-    { return range::detail::direct_container<Begin, End>{ begin, end }; }
+    {
+      return range::detail::direct_container
+      <std::decay_t<Begin>, std::decay_t<End>>
+      { begin, end };
+    }
 
     /* Shorthand for building a range to cover a whole container. */
     template <typename C>
